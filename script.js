@@ -443,3 +443,10 @@
   });
 
 })();
+
+function openEmail() {
+  window.open(
+    "https://mail.google.com/mail/?view=cm&fs=1&to=gaurangsharma262@gmail.com",
+    "_blank"
+  );
+}
