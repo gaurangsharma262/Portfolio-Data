@@ -282,8 +282,15 @@
 
     // Click expand
     card.addEventListener('click', () => {
-      card.classList.toggle('active');
-    });
+  // If it's the IPL project → open link
+  if (card.id === "project-1") {
+    window.open("https://ipl-prediction-r5b8.onrender.com/", "_blank");
+    return;
+  }
+
+  // Otherwise keep normal behavior
+  card.classList.toggle('active');
+});
   });
 
   // ── MAGNETIC EFFECT ON BUTTONS ─────────────────────
@@ -449,4 +456,8 @@ function openEmail() {
     "https://mail.google.com/mail/?view=cm&fs=1&to=gaurangsharma262@gmail.com",
     "_blank"
   );
+}
+
+function openProject() {
+  window.open("https://ipl-prediction-r5b8.onrender.com/", "_blank");
 }
