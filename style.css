@@ -30,49 +30,12 @@ body {
   overflow-x: hidden;
   line-height: 1.4;
   transition: background-color 1s ease, color 1s ease;
-  cursor: none; /* Hide default cursor */
+  /* Default cursor kept visible */
 }
 
-/* ── CUSTOM CURSOR ── */
-#custom-cursor {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  background: var(--red-primary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
-  mix-blend-mode: difference;
-}
-
-#cursor-aura {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--red-primary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transition: width 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67), height 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-  mix-blend-mode: normal;
-}
-
-#custom-cursor.active {
-  width: 60px;
-  height: 60px;
-  background: rgba(163, 29, 29, 0.1);
-  border: 1px solid var(--red-primary);
-}
-
-#custom-cursor.active::after {
-  content: '';
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 4px; height: 4px;
-  background: var(--red-primary);
-  border-radius: 50%;
+/* ── CUSTOM CURSOR (hidden, default cursor kept) ── */
+#custom-cursor, #cursor-aura {
+  display: none;
 }
 
 /* ── GRAINY GRADIENT LAYER ── */
@@ -106,7 +69,7 @@ body {
   height: 100%;
   z-index: 1; /* Behind content but above grainy bg */
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 1;
 }
 .page {
   width: 100%;
@@ -307,16 +270,35 @@ body {
   padding: 4rem 2rem;
   display: grid;
   grid-template-columns: 0.4fr 1.6fr;
-  transition: all 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  transition: background 0.18s ease, color 0.18s ease, padding-left 0.18s ease, box-shadow 0.18s ease;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  user-select: none;
+}
+
+.project-card::after {
+  content: '↗';
+  position: absolute;
+  top: 50%;
+  right: 2.5rem;
+  transform: translateY(-50%) scale(0.6);
+  font-size: 2rem;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
 }
 
 .project-card:hover {
   background: var(--red-primary);
   color: var(--text-light);
   padding-left: 4rem;
+  box-shadow: 0 8px 40px rgba(163, 29, 29, 0.25);
+}
+
+.project-card:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
 }
 
 .project-title {
