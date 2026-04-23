@@ -18,9 +18,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+  
+  <!-- ═══ CUSTOM CURSOR ═══ -->
+  <div id="custom-cursor"></div>
+  <div id="cursor-aura"></div>
 
   <!-- ═══ BACKGROUND LAYERS ═══ -->
   <div class="grainy-bg"></div>
+  <canvas id="web-canvas"></canvas>
 
   <!-- ═══ MAIN CONTENT ═══ -->
   <div class="page">
@@ -41,7 +46,7 @@
           <button class="btn btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</button>
         </div>
 
-        <div class="status-bar" id="status-bar">
+        <div class="status-bar" id="status-bar" data-magnetic="low">
           <span class="dot"></span>
           <span>Open to Data Science/Analyst Roles · Remote-friendly</span>
         </div>
@@ -57,7 +62,7 @@
 
     <!-- ABOUT SECTION -->
     <div class="section s_about" id="about-section">
-      <div class="section-label"><span class="decode-text" data-text="About">About</span></div>
+      <div class="section-label" data-magnetic="medium"><span class="decode-text" data-text="About">About</span></div>
       <div class="about-content">
         <p class="about-text">
           I am a <strong>Data Science Enthusiast</strong> with a passion for uncovering hidden patterns in data. My journey revolves around building intelligent systems that can perceive and understand the world—from panoramic object detection to predictive analytics.
@@ -70,7 +75,7 @@
 
     <!-- SKILLS -->
     <div class="section s1" id="skills-section">
-      <div class="section-label"><span class="decode-text" data-text="Skills">Skills</span></div>
+      <div class="section-label" data-magnetic="medium"><span class="decode-text" data-text="Skills">Skills</span></div>
       <div class="skills-grid">
         <span class="skill-tag accent">Python</span>
         <span class="skill-tag accent">Data Analysis</span>
@@ -86,9 +91,9 @@
 
     <!-- PROJECTS -->
     <div class="section s2" id="projects">
-      <div class="section-label"><span class="decode-text" data-text="Projects">Projects</span></div>
+      <div class="section-label" data-magnetic="medium"><span class="decode-text" data-text="Projects">Projects</span></div>
 
-      <div class="project-card" id="project-panorama">
+      <div class="project-card" data-magnetic="low" id="project-panorama">
         <div class="project-status">● Live Case Study</div>
         <div class="project-title">Panorama Object Detection</div>
         <div class="project-desc">AI-powered detection for ultra-wide panoramic views using YOLOv11.</div>
@@ -98,7 +103,7 @@
         <div class="tilt-shine"></div>
       </div>
 
-      <div class="project-card" id="project-ipl">
+      <div class="project-card" data-magnetic="low" id="project-ipl">
         <div class="project-status">● Web Application</div>
         <div class="project-title">IPL Predictor</div>
         <div class="project-desc">ML-powered win predictor for IPL matches using historical datasets.</div>
@@ -108,7 +113,7 @@
         <div class="tilt-shine"></div>
       </div>
 
-      <div class="project-card" id="project-chatbot">
+      <div class="project-card" data-magnetic="low" id="project-chatbot">
         <div class="project-status">● AI Assistant</div>
         <div class="project-title">Gemini AI Friend</div>
         <div class="project-desc">A premium glassmorphic AI assistant powered by Google Gemini for intelligent conversations.</div>
@@ -118,7 +123,7 @@
         <div class="tilt-shine"></div>
       </div>
 
-      <div class="project-card" id="project-yatrabook">
+      <div class="project-card" data-magnetic="low" id="project-yatrabook">
         <div class="project-status">● Travel Platform</div>
         <div class="project-title">YatraBook</div>
         <div class="project-desc">A high-end travel booking platform with animated UI and intelligent recommendations.</div>
@@ -128,7 +133,7 @@
         <div class="tilt-shine"></div>
       </div>
 
-      <div class="project-card" id="project-sales">
+      <div class="project-card" data-magnetic="low" id="project-sales">
         <div class="project-status">● Analytics</div>
         <div class="project-title">Sales Dashboard</div>
         <div class="project-desc">Interactive dashboard for deep-dive sales analytics and real-time data visualization.</div>
@@ -141,7 +146,7 @@
 
     <!-- CONTACT -->
     <div class="section s4" id="contact">
-      <div class="section-label"><span class="decode-text" data-text="Contact">Contact</span></div>
+      <div class="section-label" data-magnetic="medium"><span class="decode-text" data-text="Contact">Contact</span></div>
       <div class="contact-row">
         <a class="contact-link" href="https://linkedin.com/in/gaurangsharma342005" target="_blank">
           <i class="fab fa-linkedin"></i> LinkedIn

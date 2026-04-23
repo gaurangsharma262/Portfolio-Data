@@ -148,7 +148,112 @@
   }, { threshold: 0.5 });
   document.querySelectorAll('.decode-text').forEach(el => decodeObserver.observe(el));
 
+  // ── WEB STRUCTURE ENGINE (ANTIGRAVITY STYLE) ────────
+  const canvas = document.getElementById('web-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  const mouse = { x: null, y: null, radius: 250 };
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.baseX = this.x;
+      this.baseY = this.y;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.size = 1.5;
+    }
+    update() {
+      // Normal motion
+      this.x += this.vx;
+      this.y += this.vy;
+
+      // Bounce
+      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+      // Cursor attraction
+      let dx = mouse.x - this.x;
+      let dy = mouse.y - this.y;
+      let distance = Math.sqrt(dx * dx + dy * dy);
+      
+      if (distance < mouse.radius) {
+        const force = (mouse.radius - distance) / mouse.radius;
+        const directionX = (dx / distance) * force * 5;
+        const directionY = (dy / distance) * force * 5;
+        this.x += directionX;
+        this.y += directionY;
+      } else {
+        // Return to base motion if needed or just drift
+      }
+    }
+    draw() {
+      ctx.fillStyle = '#A31D1D';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function initParticles() {
+    particles = [];
+    let count = (canvas.width * canvas.height) / 15000; // Reduced density for performance
+    for (let i = 0; i < count; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  function connect() {
+    for (let a = 0; a < particles.length; a++) {
+      for (let b = a; b < particles.length; b++) {
+        let dx = particles[a].x - particles[b].x;
+        let dy = particles[a].y - particles[b].y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < 150) {
+          let opacity = 1 - (distance / 150);
+          ctx.strokeStyle = `rgba(163, 29, 29, ${opacity * 0.2})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(particles[a].x, particles[a].y);
+          ctx.lineTo(particles[b].x, particles[b].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particles.length; i++) {
+      particles[i].update();
+      particles[i].draw();
+    }
+    connect();
+    requestAnimationFrame(animate);
+  }
+
+  initParticles();
+  animate();
+
 })();
+
 
 function openEmail() {
   window.open("https://mail.google.com/mail/?view=cm&fs=1&to=gaurangsharma262@gmail.com", "_blank");
