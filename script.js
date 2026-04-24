@@ -27,36 +27,41 @@
   const projectCards = document.querySelectorAll('.project-card');
   let overCard = false;
 
+  // Map card IDs to their URLs
+  const projectUrls = {
+    'project-panorama': 'https://gaurangsharma262-panorama-deploy.hf.space/',
+    'project-ipl':      'https://ipl-prediction-r5b8.onrender.com/',
+    'project-chatbot':  'https://ai-chatbot-06fq.onrender.com/',
+    'project-yatrabook':'https://yatrabook-collegemajor-9wf3.vercel.app/',
+    'project-sales':    '#',
+  };
+
+  function openLink(url) {
+    if (!url || url === '#') return;
+    const a = document.createElement('a');
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
   projectCards.forEach(card => {
     card.addEventListener('mouseenter', () => { overCard = true; });
     card.addEventListener('mouseleave', () => { overCard = false; });
 
-    // Update shine position only
+    // Shine effect on hover
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
       const shine = card.querySelector('.tilt-shine');
       if (shine) {
-        shine.style.setProperty('--mouse-x', (x / rect.width * 100) + '%');
-        shine.style.setProperty('--mouse-y', (y / rect.height * 100) + '%');
+        shine.style.setProperty('--mouse-x', ((e.clientX - rect.left) / rect.width * 100) + '%');
+        shine.style.setProperty('--mouse-y', ((e.clientY - rect.top) / rect.height * 100) + '%');
       }
     });
 
-    // Project links
-    card.addEventListener('click', () => {
-      if (card.id === "project-panorama") {
-        window.open("https://gaurangsharma262-panorama-deploy.hf.space/", "_blank");
-      } else if (card.id === "project-ipl") {
-        window.open("https://ipl-prediction-r5b8.onrender.com/", "_blank");
-      } else if (card.id === "project-chatbot") {
-        window.open("https://ai-chatbot-06fq.onrender.com/", "_blank");
-      } else if (card.id === "project-yatrabook") {
-        window.open("https://yatrabook-collegemajor-9wf3.vercel.app/", "_blank");
-      } else if (card.id === "project-sales") {
-        window.open("#", "_blank"); // Placeholder
-      }
-    });
+    card.addEventListener('click', () => openLink(projectUrls[card.id]));
   });
 
   // ── ANTIGRAVITY EASTER EGG ─────────────────────────
