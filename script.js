@@ -52,7 +52,7 @@
       } else if (card.id === "project-chatbot") {
         window.open("https://ai-chatbot-06fq.onrender.com/", "_blank");
       } else if (card.id === "project-yatrabook") {
-        window.open("https://yatrabook.vercel.app/", "_blank"); // Placeholder
+        window.open("https://yatrabook-collegemajor-9wf3.vercel.app/", "_blank");
       } else if (card.id === "project-sales") {
         window.open("#", "_blank"); // Placeholder
       }
